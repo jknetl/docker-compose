@@ -1,0 +1,17 @@
+version: "2.1"
+services:
+  netbootxyz:
+    image: ghcr.io/linuxserver/netbootxyz
+    container_name: netbootxyz
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - MENU_VERSION=1.9.9 #optional
+    volumes:
+      - /tmp/config:/config
+      - /tmp/assets:/assets #optional
+    ports:
+      - 3000:3000
+      - 69:69/udp
+      - 8080:80 #optional
+    restart: unless-stopped
