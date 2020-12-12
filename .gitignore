@@ -35,4 +35,4 @@ tags
 
 # End of https://www.toptal.com/developers/gitignore/api/docker,vim,vscode
 
-dnsmasq/dnsmasq.conf
+netboot-pxe/dnsmasq/dnsmasq.conf
