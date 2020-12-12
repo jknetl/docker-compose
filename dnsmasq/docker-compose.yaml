@@ -1,10 +1,10 @@
 version: '2'
 services:
-  dns:
+  dhcp:
     restart: always
     # host network mode is required to be able receive DHCPOFFER on physical machines outside of docker
     network_mode: host
-    image: strm/dnsmasq
+    build: .
     volumes:
       - ./dnsmasq.conf:/etc/dnsmasq.conf
     # Publishing of ports is not required when runing in host network mode
