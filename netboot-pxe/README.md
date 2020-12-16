@@ -13,6 +13,7 @@ To boot from PXE your DHCP server must instruct client to the location of PXE se
 1. copy `dnsmasq/dnsmasq.conf.example` to `dnsmasq/dnsmasq.conf`.
 2. edit `dnsmasq/dnsmasq.conf` top section (marked with "IMPORTANT" comment) to use proper ip address which your network uses normally
 3. disable DHCP on your SOHO router
+4. Make sure nothing is using port 53 and 69
 
 ### Change path of config files and assets for netboot
 
@@ -26,6 +27,14 @@ To boot from PXE your DHCP server must instruct client to the location of PXE se
     - netboot docs
 
 ### Booting windows
+
+1. take ISO and extract it into `assets/win10/x64` subfolder
+2. When booted into netboot.xyz select "Windows installation"
+3. Enter url to windows `http://YOUR-IP:8080/win10`
+    - The ending slash must not be present
+4. Select boot from url
+    - the installer should boot few files from network 
+    - it will show their path so check the URL if they cannot be obtained
 
 https://discourse.linuxserver.io/t/running-windows-setup-in-netboot-xyz/1379
 
