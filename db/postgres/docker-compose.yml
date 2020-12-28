@@ -1,0 +1,38 @@
+# Use postgres/example user/password credentials
+version: "3.3"
+
+services:
+  posgres13:
+    image: postgres:13
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: postgres # password for postgres user
+    # ports:
+    #   - 5432:5432
+    volumes:
+      - postgres13_data:/var/www/html
+    networks:
+      - databases
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8088:8080
+    networks:
+      - databases
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: postgres@localhost
+      PGADMIN_DEFAULT_PASSWORD: postgres
+    networks:
+      - databases
+
+networks:
+  databases:
+    external:
+      name: databases
+
+volumes:
+  postgres13_data: {}
