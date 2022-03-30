@@ -36,3 +36,5 @@ tags
 # End of https://www.toptal.com/developers/gitignore/api/docker,vim,vscode
 
 netboot-pxe/dnsmasq/dnsmasq.conf
+
+**/wordpress-data
