@@ -1,0 +1,26 @@
+version: "3"
+services:
+  keycloak:
+    image: quay.io/keycloak/keycloak:latest
+    environment:
+      - KEYCLOAK_DATABASE_HOST=postgresql
+      - KEYCLOAK_DATABASE_USER=postgres
+      - KEYCLOAK_DATABASE_PASSWORD=postgres
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin
+    ports:
+      - 8080:8080
+    command: start-dev
+    # volumes:
+    #   - /path/to/init-scripts:/docker-entrypoint-initdb.d
+  postgresql:
+    image: "docker.io/bitnami/postgresql:13"
+    environment:
+      - POSTGRESQL_USERNAME=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRESQL_DATABASE=keycloak
+    volumes:
+      - db:/var/lib/postgresql/data
+volumes:
+  db:
+    driver: local
