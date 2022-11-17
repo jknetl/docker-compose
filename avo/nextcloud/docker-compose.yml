@@ -27,6 +27,7 @@ services:
       - REDIS_HOST=redis
     env_file:
       - db.env
+      - app.env
     depends_on:
       - db
       - redis
@@ -37,6 +38,8 @@ services:
   web:
     image: nginx
     restart: always
+    env_file:
+      - app.env
     ports:
       - 8080:80
     volumes:
