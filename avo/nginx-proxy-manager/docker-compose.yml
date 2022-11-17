@@ -1,6 +1,6 @@
 version: '3'
 services:
-  app:
+  nginx-proxy-manager:
     image: 'jc21/nginx-proxy-manager:latest'
     restart: unless-stopped
     ports:
@@ -8,5 +8,10 @@ services:
       - '81:81'
       - '443:443'
     volumes:
-      - ./data:/data
-      - ./letsencrypt:/etc/letsencrypt
+      - /home/docker/nginx-proxy-manager/data/:/data
+      - /home/docker/nginx-proxy-manager/letsencrypt:/etc/letsencrypt
+
+networks:
+  default:
+    external: true
+    name: ingress
