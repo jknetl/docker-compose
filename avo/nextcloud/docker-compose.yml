@@ -1,0 +1,52 @@
+version: '3'
+
+services:
+  db:
+    image: mariadb:10.5
+    command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
+    restart: always
+    volumes:
+      - /home/docker/nextcloud/db-data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=
+      - MARIADB_AUTO_UPGRADE=1
+      - MARIADB_DISABLE_UPGRADE_BACKUP=1
+    env_file:
+      - db.env
+
+  redis:
+    image: redis:alpine
+    restart: always
+
+  app:
+    image: nextcloud:fpm-alpine
+    restart: always
+    volumes:
+      - /home/docker/nextcloud/web:/var/www/html
+    environment:
+      - MYSQL_HOST=db
+      - REDIS_HOST=redis
+    env_file:
+      - db.env
+    depends_on:
+      - db
+      - redis
+    networks:
+      - default
+      - ingress
+
+  web:
+    image: nginx
+    restart: always
+    ports:
+      - 8080:80
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - /home/docker/nextcloud/web:/var/www/html
+
+
+networks:
+  default:
+  ingress:
+    name: ingress
+    external: true
