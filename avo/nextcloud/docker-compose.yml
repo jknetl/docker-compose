@@ -35,6 +35,16 @@ services:
       - default
       - ingress
 
+  cron:
+    image: nextcloud:fpm-alpine
+    restart: always
+    volumes:
+      - /home/docker/nextcloud/web:/var/www/html
+    entrypoint: /cron.sh
+    depends_on:
+      - db
+      - redis
+
   web:
     image: nginx
     restart: always
