@@ -2,7 +2,7 @@ version: '3'
 
 services:
   db:
-    image: mariadb:10.5
+    image: mariadb:$MARIA_DB_VERSION
     command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
     restart: always
     volumes:
@@ -18,7 +18,11 @@ services:
     restart: always
 
   app:
-    image: nextcloud:fpm-alpine
+    image: jknetl/nextcloud:$NEXTCLOUD_VERSION
+    build: 
+      context: ./app
+      args:
+        NEXTCLOUD_VERSION: $NEXTCLOUD_VERSION
     restart: always
     volumes:
       - /home/docker/nextcloud/web:/var/www/html
@@ -36,17 +40,23 @@ services:
       - ingress
 
   cron:
-    image: nextcloud:fpm-alpine
+    image: nextcloud:$NEXTCLOUD_VERSION
     restart: always
     volumes:
       - /home/docker/nextcloud/web:/var/www/html
     entrypoint: /cron.sh
+    environment:
+      - MYSQL_HOST=db
+      - REDIS_HOST=redis
+    env_file:
+      - db.env
+      - app.env
     depends_on:
       - db
       - redis
 
   web:
-    image: nginx
+    image: nginx:$NGINX_VERSION
     restart: always
     env_file:
       - app.env
