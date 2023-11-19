@@ -40,7 +40,7 @@ services:
       - ingress
 
   cron:
-    image: nextcloud:$NEXTCLOUD_VERSION
+    image: jknetl/nextcloud:$NEXTCLOUD_VERSION
     restart: always
     volumes:
       - /home/storage/docker/nextcloud/web:/var/www/html
