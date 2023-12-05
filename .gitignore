@@ -40,3 +40,5 @@ netboot-pxe/dnsmasq/dnsmasq.conf
 **/wordpress-data
 
 **/.env.secrets
+
+avo/couchdb/data

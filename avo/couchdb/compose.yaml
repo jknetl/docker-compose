@@ -1,0 +1,18 @@
+# couchdb compose.yaml
+#
+# after first startup it is required to complete either
+#  - cluster setup wizard https://docs.couchdb.org/en/stable/setup/cluster.html#the-cluster-setup-wizard)
+#  - cluster setup api https://docs.couchdb.org/en/stable/setup/cluster.html#the-cluster-setup-api
+
+version: '3'
+services:
+  couchdb:
+    image: couchdb:3
+    ports:
+      - "5984:5984"
+    environment:
+      - COUCHDB_USER=admin
+    env_file:
+      - .env.secrets
+    volumes:
+        - ./data:/opt/couchdb/data
