@@ -38,3 +38,5 @@ tags
 netboot-pxe/dnsmasq/dnsmasq.conf
 
 **/wordpress-data
+
+**/.env.secrets
