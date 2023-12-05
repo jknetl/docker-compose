@@ -1,9 +1,3 @@
-# couchdb compose.yaml
-#
-# after first startup it is required to complete either
-#  - cluster setup wizard https://docs.couchdb.org/en/stable/setup/cluster.html#the-cluster-setup-wizard)
-#  - cluster setup api https://docs.couchdb.org/en/stable/setup/cluster.html#the-cluster-setup-api
-
 version: '3'
 services:
   couchdb:
