@@ -10,3 +10,7 @@ services:
       - .env.secrets
     volumes:
         - ./data:/opt/couchdb/data
+networks:
+  default:
+    external: true
+    name: ingress
