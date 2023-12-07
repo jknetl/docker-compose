@@ -10,6 +10,7 @@ services:
       - .env.secrets
     volumes:
         - ./data:/opt/couchdb/data
+        - ./local.ini:/opt/couchdb/etc/local.ini
 networks:
   default:
     external: true
