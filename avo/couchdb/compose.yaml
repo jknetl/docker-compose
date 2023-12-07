@@ -11,6 +11,7 @@ services:
     volumes:
         - ./data:/opt/couchdb/data
         - ./local.ini:/opt/couchdb/etc/local.ini
+    restart: unless-stopped
 networks:
   default:
     external: true
