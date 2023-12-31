@@ -25,6 +25,9 @@ services:
       - "2222:2222"
     depends_on:
       - db
+    networks:
+      - default
+      - ingress
   db:
     image: mysql:8
     restart: always
@@ -41,5 +44,6 @@ services:
 
 networks:
   default:
-    external: true
+  ingress:
     name: ingress
+    external: true

@@ -27,7 +27,7 @@ services:
     volumes:
       - $STORAGE_DIR/web:/var/www/html
     environment:
-      - MYSQL_HOST=db
+      - MYSQL_HOST=$DB_HOST
       - REDIS_HOST=redis
     env_file:
       - db.env
@@ -46,7 +46,7 @@ services:
       - $STORAGE_DIR/web:/var/www/html
     entrypoint: /cron.sh
     environment:
-      - MYSQL_HOST=db
+      - MYSQL_HOST=$DB_HOST
       - REDIS_HOST=redis
     env_file:
       - db.env
